@@ -2,22 +2,20 @@
 using DriveNow.Application.Services;
 using DriveNow.Domain.Enums;
 using DriveNow.Domain.Exceptions;
-using DriveNow.Infrastructure.External;
 using FluentAssertions;
 
 namespace DriveNow.UnitTests.Naive;
 
 public class BookingServiceTests
 {
-    // Seed data (README "Seed data" / InMemoryDatabase)
-    private const int GoldCustomerId = 1; // Ahmed Fawzy, Gold, 1 open seed booking (vehicle 5)
-    private const int RegularCustomerId = 2; // Mariam Adel, 23y, no tier, no open bookings
-    private const int SilverCustomerId = 3; // Khaled Mostafa, 25y, Silver, no open bookings
-    private const int PlatinumCustomerId = 5; // Tamer Nabil, Platinum, 1 open seed booking (vehicle 7)
+    private const int GoldCustomerId = 1; 
+    private const int RegularCustomerId = 2; 
+    private const int SilverCustomerId = 3; 
+    private const int PlatinumCustomerId = 5; 
 
-    private const int EconomyVehicleId = 1; // Hyundai Accent, no seed bookings
-    private const int EconomyVehicle2Id = 2; // Kia Rio, no seed bookings
-    private const int CompactVehicleId = 3; // Toyota Corolla, no seed bookings
+    private const int EconomyVehicleId = 1;
+    private const int EconomyVehicle2Id = 2; 
+    private const int CompactVehicleId = 3; 
 
     private static BookingRequest Request(int customerId, int vehicleId, int daysFromNow) => new()
     {
@@ -30,9 +28,9 @@ public class BookingServiceTests
     };
 
     [Fact]
-    [Trait("Rule", "BR-24")] // Reserved status, start mileage
-    [Trait("Rule", "BR-25")] // reference format
-    [Trait("Rule", "BR-26")] // Economy deposit 1,000
+    [Trait("Rule", "BR-24")] 
+    [Trait("Rule", "BR-25")] 
+    [Trait("Rule", "BR-26")] 
     public void CreateBooking_ValidRequest_ReturnsReservedBooking()
     {
         var service = new BookingService();
@@ -45,7 +43,7 @@ public class BookingServiceTests
     }
 
     [Fact]
-    [Trait("Rule", "BR-26")] // Platinum pays 0 and the gateway is not called
+    [Trait("Rule", "BR-26")] 
     public void CreateBooking_PlatinumCustomer_ChargesNoDeposit()
     {
         var service = new BookingService();
@@ -53,11 +51,10 @@ public class BookingServiceTests
         var booking = service.CreateBooking(Request(PlatinumCustomerId, CompactVehicleId, daysFromNow: 15));
 
         booking.Deposit.Should().Be(0m);
-        // "The gateway is not called" cannot be verified: PaymentGateway is created inside the service.
     }
 
     [Fact]
-    [Trait("Rule", "BR-21")] // overlap with the vehicle's open bookings
+    [Trait("Rule", "BR-21")]
     public void CreateBooking_OverlappingDates_ThrowsBookingRejected()
     {
         var service = new BookingService();
