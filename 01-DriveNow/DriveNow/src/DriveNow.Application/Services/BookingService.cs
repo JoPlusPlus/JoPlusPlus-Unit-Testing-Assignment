@@ -18,7 +18,8 @@ public class BookingService
     readonly PricingService _pricing = new();
     readonly PaymentGateway _payments = new();
     readonly SmsSender _sms = new();
-    readonly EmailSender _email = new();
+    static TimeProvider timeProvider = TimeProvider.System;
+    readonly EmailSender _email = new(timeProvider);
 
     public Booking CreateBooking(BookingRequest request)
     {

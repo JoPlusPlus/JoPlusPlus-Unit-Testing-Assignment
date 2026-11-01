@@ -14,7 +14,8 @@ public class CancellationService
     readonly PromoCodeRepository _promos = new();
     readonly PaymentGateway _payments = new();
     readonly SmsSender _sms = new();
-    readonly EmailSender _email = new();
+    static TimeProvider timeProvider = TimeProvider.System;
+    readonly EmailSender _email = new(timeProvider);
 
     public decimal Cancel(int bookingId)
     {

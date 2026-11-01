@@ -16,10 +16,14 @@ public class ReturnService
     readonly VehicleRepository _vehicles = new();
     readonly CustomerRepo _customers = new();
     readonly PaymentGateway _payments = new();
-    readonly EmailSender _email = new();
+    static TimeProvider timeProvider = TimeProvider.System;
+     readonly EmailSender _email = new(timeProvider);
 
     public ReturnReport ProcessReturn(int bookingId, int endMileage, int fuelQuarters, decimal damageCost)
     {
+
+        
+
         var booking = _bookings.GetById(bookingId)
             ?? throw new BookingNotFoundException($"Booking #{bookingId} not found");
         if (booking.Status != BookingStatus.Active)
