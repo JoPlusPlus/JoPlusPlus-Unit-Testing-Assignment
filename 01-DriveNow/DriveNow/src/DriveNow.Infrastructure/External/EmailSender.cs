@@ -1,6 +1,6 @@
-namespace DriveNow.Infrastructure.External;
+using DriveNow.Domain.Abstractions;namespace DriveNow.Infrastructure.External;
 
-public class EmailSender
+public class EmailSender : IEmailSender
 {
     readonly TimeProvider _clock;
 

@@ -1,9 +1,10 @@
+using DriveNow.Domain.Abstractions;
 using DriveNow.Domain.Entities;
 using DriveNow.Infrastructure.Persistence;
 
 namespace DriveNow.Infrastructure.Repositories;
 
-public class CustomerRepo
+public class CustomerRepo : ICustomerRepository
 {
     public Customer? GetById(int id) =>
         InMemoryDatabase.Customers.FirstOrDefault(customer => customer.Id == id);
