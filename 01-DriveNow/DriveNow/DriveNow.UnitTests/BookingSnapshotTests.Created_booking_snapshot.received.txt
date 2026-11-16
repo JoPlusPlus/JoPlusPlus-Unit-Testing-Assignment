@@ -1,0 +1,14 @@
+﻿{
+  Id: 1,
+  Reference: DN-20261105-A1B2,
+  CustomerId: 1,
+  VehicleId: 1,
+  PickupAt: DateTime_1,
+  ReturnAt: DateTime_2,
+  Price: {
+    Total: 1000.0
+  },
+  Deposit: 1000.0,
+  CreatedAt: DateTime_3,
+  StartMileage: 12345
+}

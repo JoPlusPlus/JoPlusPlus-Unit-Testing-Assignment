@@ -1,0 +1,10 @@
+global using Xunit;
+global using Moq;
+global using DriveNow.Application.Models;
+global using DriveNow.Application.Services;
+global using DriveNow.Domain.Abstractions;
+global using DriveNow.Domain.Entities;
+global using DriveNow.Domain.Enums;
+global using DriveNow.Domain.Exceptions;
+global using DriveNow.Domain.ValueObjects;
+global using DriveNow.Infrastructure.External;
